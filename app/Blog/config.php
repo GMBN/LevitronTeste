@@ -12,7 +12,8 @@ return [
         '/blog/$categoria' => 'Categoria:index',
         '/blog/categoria/view' => 'Categoria:view',
         '/blog' => 'Blog:index',
-        '/' => 'Blog:index'
+        '/' => 'Blog:index',
+        '/blog/lista-email/save' => 'ListaEmail:save'
     ],
     'template' => 'blog'
 ];

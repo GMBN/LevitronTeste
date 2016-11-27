@@ -25,6 +25,9 @@ return [
         '/admin/usuario/img' => 'Usuario:img',
         '/admin/usuario/senha' => 'Usuario:editSenha',
         
+        '/admin/config' => 'Config:index',
+        '/admin/config/save' => 'Config:save',
+        
         
         '/admin' => 'Blog:index'
     ],

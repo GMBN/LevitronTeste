@@ -233,12 +233,16 @@ trait ViewHelper {
     function avatar() {
         return "/img/avatar.png";
     }
-    
-    function countNotificacoes(){
+
+    function countNotificacoes() {
         $noty = new \App\Usuario\Model\Notificacao();
         $id_usuario = $this->auth()->getIdUsuario();
         return $noty->countNew($id_usuario);
     }
-            
+
+    function getConfig($chave) {
+        $model = new \App\Admin\Model\Config();
+        return $model->getConfig($chave);
+    }
 
 }

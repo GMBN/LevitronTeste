@@ -47,6 +47,21 @@ class App {
 
         $params = array();
 
+        //verifica se existe uma rota identica
+        if (isset($this->route[$this->requestUri])) {
+            $controller = $this->route[$this->requestUri];
+            $alias = $this->requestUri;
+            $array_controller = explode(':', $controller);
+            $m = $this->module[$alias];
+            $this->currentModule = $m;
+            $this->currentTemplate = $this->template[$m];
+            $this->controller = "App\\{$m}\\Controller\\" . $array_controller[0];
+            $this->controllerName = $array_controller[0];
+            $this->action = $array_controller[1];
+            $this->param = $params;
+            return $this->exec(); //Executa o controller
+        }
+
 
         foreach ($this->route as $alias => $controller) {
 
@@ -100,8 +115,8 @@ class App {
 
     function render($dados) {
         $view = __DIR__ . '/' . $this->currentModule . '/View/' . strtolower($this->controllerName) . '/' . $this->action . '.php';
-        if (file_exists($this->currentTemplate.'.php')) {
-            $template = $this->currentTemplate.'.php';
+        if (file_exists($this->currentTemplate . '.php')) {
+            $template = $this->currentTemplate . '.php';
         } else {
             $template = __DIR__ . '/' . $this->currentModule . '/View/template/' . $this->currentTemplate . '.php';
         }

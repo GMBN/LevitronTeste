@@ -132,15 +132,18 @@
                 <div class="footer-nav bg-light text-center p-20">
                     <div id="flipclock1" class="clock" style="margin:2em; width: auto; display: inline-block;"></div>
                     <div class="col-md-6 col-md-offset-3">
-                        <form id="mailchimp-subscription-form1" class="newsletter-form" novalidate="true">
-                            <label for="mce-EMAIL">Inscreva-se</label>
+                        <form id="formListaEmail" class="newsletter-form" >
+                            <label>Inscreva-se</label>
                             <div class="input-group">
-                                <input type="email" id="mce-EMAIL" data-height="45px" class="form-control input-lg" placeholder="Seu E-mail" name="EMAIL" value="" style="height: 45px;">
+                                <input type="email" data-height="45px" class="form-control input-lg" placeholder="Seu E-mail" name="email" value="" style="height: 45px;" required="">
                                 <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-dark btn-lg m-0 hvr-sweep-to-right" data-height="45px" style="height: 45px;">Inscrever-se</button>
+                                    <button type="submit" id="btnAddEmail" class="btn btn-dark btn-lg m-0 hvr-sweep-to-right" data-height="45px" style="height: 45px;">Inscrever-se</button>
                                 </span>
                             </div>
                         </form>
+                        <div class="alert alert-success" style="display: none" id="msgSucessoListaEmail">
+                            <span class="fa fa-check"></span> Obrigado! O E-mail <b id="listaEmailCadastrado"></b> foi cadastrado com sucesso!
+                        </div>
                     </div>
                     <div class="row text-center">
                         <div class="col-md-12">
@@ -160,19 +163,38 @@
     </body>
 </html>
 <script type="text/javascript">
+<?php
+$lancamento = $this->getConfig('dataLancamento');
+$secLan = strtotime(str_replace('/', '-', $lancamento));
+$secAtual = strtotime('now');
+$diff = $secLan - $secAtual;
+?>
     var clock;
     $(document).ready(function () {
-        // Grab the current date
-        var currentDate = new Date();
-        // Set some date in the future. In this case, it's always Jan 1
-        var futureDate = new Date(2017, 1, 30, 00, 00); //Date(year, month, day, hours, minutes, seconds, milliseconds); 
-        // Calculate the difference in seconds between the future and current date
-        var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
         // Instantiate a coutdown FlipClock
-        clock = $('#flipclock1').FlipClock(diff, {
+        clock = $('#flipclock1').FlipClock(<?= $diff ?>, {
             clockFace: 'DailyCounter',
             countdown: true,
             language: 'pt-br'
         });
+    });
+
+    $("#formListaEmail").on('submit', function () {
+        $("#btnAddEmail").attr('disabled', true);
+        var email = $(this).find('[name="email"]').val();
+        $.ajax({
+            url: '/blog/lista-email/save',
+            type: 'POST',
+            data: {email: email},
+            dataType: 'json',
+            success: function (obj) {
+                if (obj.success) {
+                    $("#listaEmailCadastrado").text(email);
+                    $("#formListaEmail").slideUp();
+                    $("#msgSucessoListaEmail").slideDown();
+                }
+            }
+        });
+        return false;
     });
 </script>

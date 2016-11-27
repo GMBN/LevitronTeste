@@ -5,10 +5,11 @@ var id_post = <?= $rs['id'] ?>;
 <?php
 $this->title($rs['titulo']);
 $this->metaDesc($rs['resumo']);
+$imgFundo = $this->getConfig('imagemFundo');
 ?>
 
 <!-- Section: inner-header -->
-<section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="/site/img/blog.jpg">
+<section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="<?= $imgFundo ?>">
     <div class="container pt-120 pb-50">
         <!-- Section Content -->
         <div class="section-content pt-50">

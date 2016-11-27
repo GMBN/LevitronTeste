@@ -1,0 +1,6 @@
+.app-form-login input{
+    border: solid 1px #000000!important;
+}
+.app-form-login input:focus{
+    background-color: #e2e2e2!important;
+}

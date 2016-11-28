@@ -1,5 +1,5 @@
 <?php
-$this->title('Editar Usuário '.$rs['id']);
+$this->title('Editar Usuário ' . $rs['id']);
 ?>
 <div class="row"> 
     <div class="col-md-12">
@@ -53,4 +53,20 @@ $this->title('Editar Usuário '.$rs['id']);
             <!-- /.box -->
         </div>
     </div>
+    <div class="col-md-4">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">Papeis do usuário</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div id="roleUsuario"></div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
 </div>
+<script>
+$("#roleUsuario").load("/admin/usuario/role/<?= $rs['id'] ?>");
+</script>

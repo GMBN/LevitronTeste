@@ -63,13 +63,18 @@ class Post extends Model {
                 u.nome autor_nome,
                 u.sobre autor_sobre,
                 u.img autor_img,
+                u.facebook u_facebook,
+                u.twitter u_twitter,
+                u.google u_google,
                 (
                 SELECT count(*) as comentario
                 FROM blog_comentario 
                 WHERE id_post=p.id
                 AND situ=8
                 GROUP BY id_post 
-                ) as comentario
+                ) as comentario,
+                c.titulo c_titulo,
+                c.slug c_slug
                 
                 FROM ' . $this->_table . ' p 
                INNER JOIN usuario u on u.id = p.autor
@@ -80,7 +85,11 @@ class Post extends Model {
 
         $par = ['slug' => $slug, 'categoria' => $categoria];
         $rs = $this->query($sql, $par);
-        return $rs[0];
+        
+        if (isset($rs[0])) {
+            return $rs[0];
+        }
+        return false;
     }
 
     function findId($id) {
@@ -131,8 +140,17 @@ class Post extends Model {
             SELECT count(*) as comentario
             FROM blog_comentario 
             WHERE id_post=p.id
-            GROUP BY id_post 
-            ) as comentario
+            ) as comentario,
+            (
+            SELECT count(*) as visualizacao
+            FROM blog_post_visualizacao
+            WHERE id_post=p.id
+            ) as visualizacao,
+            (
+            SELECT count(DISTINCT ip) as visualizacao
+            FROM blog_post_visualizacao
+            WHERE id_post=p.id
+            ) as visualizacao_unica
             
             FROM ' . $this->_table . ' p
             INNER JOIN blog_categoria a on a.id=p.id_categoria

@@ -8,7 +8,7 @@ abstract class Model {
      * @var type \PDO
      */
     private $db;
-    protected $lastInsertId;
+    private $lastInsertId;
 
     public function __construct() {
         $config = $GLOBALS['APP_CONFIG']['connect'];
@@ -100,9 +100,24 @@ abstract class Model {
         $this->exec($prepare);
     }
 
+    function delete($where = null, $par = array()) {
+        $db = $this->db;
+
+        $sql = 'DELETE FROM ' . $this->_table . ' ';
+
+        $sql.=' WHERE ' . $where;
+
+        $prepare = $db->prepare($sql);
+
+        foreach ($par as $key => $val) {
+            $prepare->bindValue(':' . $key, $val);
+        }
+        $this->exec($prepare);
+    }
+
     function dados() {
         $dados = get_object_vars($this);
-        unset($dados['_table'], $dados['db'], $dados['id']);
+        unset($dados['_table'], $dados['db'], $dados['id'], $dados['lastInsertId']);
         return $dados;
     }
 
@@ -118,9 +133,11 @@ abstract class Model {
             }
         }
         if (!$prepare->execute()) {
-            echo $prepare->queryString;
-            print_r($prepare->errorInfo());
-            exit();
+            if (DEBUG) {
+                echo $prepare->queryString;
+                print_r($prepare->errorInfo());
+                exit();
+            }
         }
     }
 

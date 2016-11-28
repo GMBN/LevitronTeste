@@ -47,7 +47,14 @@ class Categoria extends Model {
                 p.slug p_slug,
                 p.img p_img,
                 p.created p_created,
-                u.nome nome_autor
+                u.nome nome_autor,
+                (
+                SELECT count(*) as comentario
+                FROM blog_comentario 
+                WHERE id_post=p.id
+                GROUP BY id_post 
+                ) as comentario
+                
                 from ' . $this->_table . ' c 
                INNER JOIN blog_post p ON p.id_categoria=c.id
                INNER JOIN usuario u on u.id = p.autor

@@ -88,10 +88,10 @@
                                             'desc' => 'Quem Somos',
                                             'url' => '/quem-somos'
                                         ],
-                                        [
-                                            'desc' => 'Contato',
-                                            'url' => '/contato'
-                                        ]
+//                                        [
+//                                            'desc' => 'Contato',
+//                                            'url' => '/contato'
+//                                        ]
                                             ]
                                     ?>
                                     <?= $this->menuSite($menu); ?>
@@ -118,8 +118,10 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 text-center">
                             <a class="text-white font-playball font-32" href="#">SOS <i class="fa fa-heart-o font-25"></i> CASAR</a>
-                            <p class="font-12 mt-20 mb-20">Lorem ipsum dolor sit amet, consectetur adipisicing elits. Fugit vel, eius cum eum. Templates with predefined web elements which helps you to build your own site. Lorem ipsum dolor sit amet elit.</p>
-                            <ul class="social-icons flat medium list-inline mb-40">
+                            <p class="font-12 mt-20 mb-20">
+                            <?= $this->getConfig('textoRodape');  ?>
+                            </p>
+                            <ul class="social-icons flat medium list-inline mb-0">
                                 <li><a href="#"><i class="fa fa-facebook"></i></a> </li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a> </li>
                                 <li><a href="#"><i class="fa fa-pinterest"></i></a> </li>

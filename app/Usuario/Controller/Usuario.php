@@ -16,7 +16,7 @@ class Usuario extends BaseController {
         if (isset($usuario['id'])) {
             //Verifica a pagina para redirecionamento
             if ($usuario['tipo'] == 2) {
-                $redirect_default = '/admin';
+                $redirect_default = '/admin/blog/post';
             } else {
                 $redirect_default = '/painel';
             }
@@ -40,7 +40,7 @@ class Usuario extends BaseController {
 
                 //Verifica a pagina para redirecionamento
                 if ($rs['tipo'] == 2) {
-                    $redirect_default = '/admin';
+                    $redirect_default = '/admin/blog/post';
                 } else {
                     $redirect_default = '/painel';
                 }

@@ -107,6 +107,9 @@ class App {
             $par = array_values($this->param);
             $class = new $this->controller();
             $dados = call_user_func_array(array($class, $this->action), $par);
+            if($dados===404){
+                return $this->notFound();
+            }
             return $this->render($dados);
         } else {
             return $this->notAllow();
@@ -133,9 +136,8 @@ class App {
 
     function notFound() {
         http_response_code(404);
-        exit();
         $view = __DIR__ . '/Base/View/notFound.php';
-        $template = __DIR__ . '/' . $this->currentModule . '/View/template/' . $this->currentTemplate . '.php';
+        $template = __DIR__ . '/Blog/View/template/blog.php';
         $service = new \App\Base\Service\View();
         return $service->render([], $view, $template);
     }

@@ -74,8 +74,4 @@ class Blog extends BaseController {
         exit;
     }
 
-    function index() {
-        return ["par"];
-    }
-
 }

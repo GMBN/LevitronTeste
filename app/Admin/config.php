@@ -17,13 +17,16 @@ return [
         
         '/admin/blog/galeria' => 'BlogGaleria:index',
         '/admin/blog/galeria/upload' => 'BlogGaleria:upload',
-        '/admin/blog/galeria/view' => 'BlogGaleria:view',
+        '/admin/blog/galeria/view' => 'BlogGaleria:view',        
+        
+        '/admin/blog/lista-email' => 'ListaEmail:index',
         
         '/admin/usuario' => 'Usuario:index',
         '/admin/usuario/add' => 'Usuario:add',
         '/admin/usuario/edit/$id' => 'Usuario:edit',        
         '/admin/usuario/img' => 'Usuario:img',
         '/admin/usuario/senha' => 'Usuario:editSenha',
+        '/admin/usuario/role/$usuario' => 'Usuario:role',
         
         '/admin/config' => 'Config:index',
         '/admin/config/save' => 'Config:save',

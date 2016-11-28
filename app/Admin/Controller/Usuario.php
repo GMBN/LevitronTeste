@@ -10,7 +10,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 class Usuario extends BaseController {
 
     use \App\Usuario\Service\SafeTrait;
-    
+
     function add() {
 
         if ($this->isGet()) {
@@ -24,7 +24,7 @@ class Usuario extends BaseController {
             $model->insert();
             $id = $model->getLastInsertId();
             $this->msgSucesso('Usuário adicionado com sucesso');
-            return $this->redirect('/admin/usuario/edit/'.$id);
+            return $this->redirect('/admin/usuario/edit/' . $id);
         }
     }
 
@@ -45,20 +45,21 @@ class Usuario extends BaseController {
             return $this->redirect('/admin/usuario');
         }
     }
-    function editSenha() {      
+
+    function editSenha() {
 
         if ($this->isPost()) {
             $id = $_POST['id'];
-            if($_POST['senha'] != $_POST['confirmar_senha']){
+            if ($_POST['senha'] != $_POST['confirmar_senha']) {
                 $this->msgErro('As senhas fornecidas não são iguais.');
-            return $this->redirect('/admin/usuario/edit/'.$id);
+                return $this->redirect('/admin/usuario/edit/' . $id);
             }
             $senha = $this->gerarSenha($_POST['senha']);
             $model = new UsuarioModel();
             $model->setSenha($senha);
             $model->update('id=:id', ['id' => $id]);
             $this->msgSucesso('Senha alterada com sucesso');
-            return $this->redirect('/admin/usuario/edit/'.$id);
+            return $this->redirect('/admin/usuario/edit/' . $id);
         }
     }
 
@@ -94,6 +95,25 @@ class Usuario extends BaseController {
         $model = new UsuarioModel();
         $rs = $model->findAll();
         return['result' => $rs];
+    }
+
+    function role($id_usuario) {
+        $model = new \App\Usuario\Model\Role();
+        if ($this->isPost()) {
+            //deleta todas os papeis do usuario
+            $model->delete('id_usuario=:u', ['u'=>$id_usuario]);
+            
+            //insere os papeis configurados
+            foreach ($_POST as $p) {
+                $model->setIdUsuario($id_usuario);
+                $model->setNome($p);
+                $model->insert();
+            }
+            $this->msgSucesso("Permissões salvas com sucesso!");
+            return $this->redirect('/admin/usuario/edit/'.$id_usuario);
+        }
+        $rs = $model->findUsuario($id_usuario);
+        return ['_template'=>false,'rs' => $rs,'id_usuario'=>$id_usuario];
     }
 
 }

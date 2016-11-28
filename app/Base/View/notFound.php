@@ -1,24 +1,23 @@
-<div class="error-page">
-        <h2 class="headline text-yellow"> 404</h2>
-
-        <div class="error-content">
-          <h3><i class="fa fa-warning text-yellow"></i> Oops! Página não encontrada.</h3>
-
-          <p>
-           A página solicitada não existe ou foi alterada
-          </p>
-
-          <form class="search-form">
-            <div class="input-group">
-              <input type="text" name="search" class="form-control" placeholder="Search">
-
-              <div class="input-group-btn">
-                <button type="submit" name="submit" class="btn btn-warning btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </div>
+<?php
+$imgFundo = $this->getConfig('imagemFundo');
+?>
+<section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="<?= $imgFundo ?>">
+    <div class="container pt-120 pb-50">
+        <!-- Section Content -->
+        <div class="section-content pt-50">
+            <div class="row"> 
+                <div class="col-md-12">
+                    <h1 class="title text-white">Página não encontrada!</h1>
+                </div>
             </div>
-            <!-- /.input-group -->
-          </form>
         </div>
-        <!-- /.error-content -->
-      </div>
+    </div>
+</section>
+<div class="row">
+    <div class="col-md-12 text-center mb-20">
+        <h1 class="font-150 text-theme-colored mt-0 mb-0"><i class="fa fa-map-signs text-gray-silver"></i>404!</h1>
+        <h2 class="mt-0">Oops! A página solicitada não foi encontrada</h2>
+        <p>A página que você estava procurando foi excluída ou não existe.</p>
+        <a class="btn btn-border btn-gray btn-transparent btn-circled" href="/">Voltar para a Página Principal</a>
+    </div>
+</div>

@@ -1,5 +1,9 @@
 <!-- Section: inner-header -->
-<section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="/site/img/blog.jpg">
+<?php
+$imgFundo = $this->getConfig('imagemFundo');
+$this->title('Blog');
+?>
+<section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="<?= $imgFundo ?>">
     <div class="container pt-120 pb-50">
         <!-- Section Content -->
         <div class="section-content pt-50">
@@ -41,7 +45,7 @@
             </div>
         <?php } ?>
     </div>
-    <div class="row">
+<!--    <div class="row">
         <div class="col-sm-12">
             <nav>
                 <ul class="pagination theme-colored xs-pull-center m-0">
@@ -56,6 +60,6 @@
                 </ul>
             </nav>
         </div>
-    </div>
+    </div>-->
 </div>
 <!-- end main-content -->

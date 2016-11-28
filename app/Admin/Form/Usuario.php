@@ -35,6 +35,24 @@ class Usuario extends BaseForm {
                 'label' => 'Sobre',
                 'col' => 12
             ],
+            'facebook' => [
+                'type' => 'text',
+                'desc' => 'Insira a URL do facebook',
+                'label' => 'Facebook',
+                'col' => 12
+            ],
+            'twitter' => [
+                'type' => 'text',
+                'desc' => 'Insira a URL do Twitter',
+                'label' => 'Twitter',
+                'col' => 12
+            ],
+            'google' => [
+                'type' => 'text',
+                'desc' => 'Insira a URL do Google Plus',
+                'label' => 'Google Plus',
+                'col' => 12
+            ],
             'tipo' => [
                 'type' => 'select',
                 'label' => 'Tipo',

@@ -2,9 +2,7 @@
 
 return [
     'route'=>[
-        '/blog/$slug'=> 'Blog:post',
-        '/blog'=> 'Blog:index',
-        '/'=> 'Blog:index'
+        '/quem-somos'=> 'Pagina:sobre'
     ],
-    'template'=>'blog'
+    'template'=> ROOT.'/app/Blog/View/template/blog'
 ];

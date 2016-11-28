@@ -1,10 +1,12 @@
 <script>
-var id_post = <?= $rs['id'] ?>;
+    var id_post = <?= $rs['id'] ?>;
 </script>
 
 <?php
 $this->title($rs['titulo']);
 $this->metaDesc($rs['resumo']);
+$this->metaImg($rs['img']);
+
 $imgFundo = $this->getConfig('imagemFundo');
 ?>
 
@@ -48,7 +50,7 @@ $imgFundo = $this->getConfig('imagemFundo');
                           </blockquote>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna et sed aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>-->
                             <div class="mt-30 mb-0">
-                                
+
                                 <h5 class="pull-left mt-10 mr-20 text-theme-colored">Compartilhe:</h5><div class="addthis_inline_share_toolbox"></div>
                             </div>
                         </div>
@@ -57,7 +59,7 @@ $imgFundo = $this->getConfig('imagemFundo');
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="tags">
-                                    <p class="mb-0"><i class="fa fa-tags text-theme-colored"></i> <span>Tags:</span> Law, Juggement, lawyer, Cases</p>
+                                    <p class="mb-0"><i class="fa fa-tags text-theme-colored"></i> <span>Categoria:</span> <a href="/blog/<?= $rs['c_slug'] ?>" class="text-theme-colored"><?= $rs['c_titulo'] ?> </a></p>
                                 </div>
                             </div>                            
                         </div>
@@ -68,9 +70,17 @@ $imgFundo = $this->getConfig('imagemFundo');
                             <h5 class="post-title mt-0 mb-0"><span class="font-18"><?= $rs['autor_nome'] ?></span></h5>
                             <p><?= $rs['autor_sobre'] ?></p>
                             <ul class="social-icons square-sm m-0">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <?php
+                                if (!empty($rs['u_facebook'])) {
+                                    echo '<li><a target="_blank" href="' . $rs['u_facebook'] . '"><i class="fa fa-facebook"></i></a></li>';
+                                }
+                                if (!empty($rs['u_twitter'])) {
+                                    echo '<li><a target="_blank" href="' . $rs['u_twitter'] . '"><i class="fa fa-twitter"></i></a></li>';
+                                }
+                                if (!empty($rs['u_google'])) {
+                                    echo '<li><a target="_blank" href="' . $rs['u_google'] . '"><i class="fa fa-google-plus"></i></a></li>';
+                                }
+                                ?>
                             </ul>
                         </div>
                         <div class="clearfix"></div>
@@ -80,19 +90,19 @@ $imgFundo = $this->getConfig('imagemFundo');
             </div>
             <div class="col-sm-12 col-md-3">
                 <div class="sidebar sidebar-right mt-sm-30">
-                    <div class="widget">
-                        <h5 class="widget-title line-bottom">Search box</h5>
-                        <div class="search-form">
-                            <form>
-                                <div class="input-group">
-                                    <input type="text" placeholder="Click to Search" class="form-control search-input">
-                                    <span class="input-group-btn">
-                                        <button type="submit" class="btn search-button"><i class="fa fa-search"></i></button>
-                                    </span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    <!--                    <div class="widget">
+                                            <h5 class="widget-title line-bottom">Search box</h5>
+                                            <div class="search-form">
+                                                <form>
+                                                    <div class="input-group">
+                                                        <input type="text" placeholder="Click to Search" class="form-control search-input">
+                                                        <span class="input-group-btn">
+                                                            <button type="submit" class="btn search-button"><i class="fa fa-search"></i></button>
+                                                        </span>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>-->
                     <div  id="categoria_view">
                     </div>
                     <div  id="post_ultimos">

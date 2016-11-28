@@ -2,7 +2,7 @@
 
 return [
     'Blog',
-//    'Site',
+    'Site',
     'Usuario',
     'Admin'
 ];

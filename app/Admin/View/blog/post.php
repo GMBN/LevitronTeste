@@ -16,6 +16,7 @@ $this->title('Posts');
                     <th style="width: 10px">#</th>
                     <th>Titulo</th>
                     <th>Criado em</th>
+                    <th>Visualizações</th>
                     <th>Comentários</th>
                     <th>Status</th>
                     <th style="width: 90px">Ações</th>
@@ -25,8 +26,16 @@ $this->title('Posts');
                         <td><?= $r['id'] ?></td>
                         <td><?= $r['titulo'] ?></td>
                         <td><?= $this->date($r['created'], 1) ?></td>
-                        <td  class="text-center"><button type="button" onclick="listComentario(<?= $r['id'] ?>)" class="btn btn-xs btn-default"><i class="fa fa-comment-o"></i> <?= (int) $r['comentario'] ?></button></td>
-                         <td><?php
+                        <td>
+                            <span class="btn btn-xs btn-default" data-toggle="tooltip" title="Total de Visualizações"><i class="fa fa-signal"></i>  <?= $r['visualizacao']; ?></span>
+                            <span class="btn btn-xs btn-default" data-toggle="tooltip" title="Total de Visualizações Únicas"> <i class="fa fa-eye"></i>  <?= $r['visualizacao_unica']; ?></span>
+                        </td>
+                        <td>
+                            <button type="button" onclick="listComentario(<?= $r['id'] ?>)" class="btn btn-xs btn-default">
+                                <i class="fa fa-comment-o"></i> <?= (int) $r['comentario'] ?>
+                            </button>
+                        </td>
+                        <td><?php
                             if ($r['ativo'] == 8) {
                                 echo '<span class="label label-success">Publicado</span>';
                             } else {
@@ -40,18 +49,8 @@ $this->title('Posts');
                         </td>
 
                     </tr>
-<?php } ?>
+                <?php } ?>
             </tbody></table>
-    </div>
-    <!-- /.box-body -->
-    <div class="box-footer clearfix">
-        <ul class="pagination pagination-sm no-margin pull-right">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
-        </ul>
     </div>
 </div>
 <div class="modal fade"  tabindex="-1" role="dialog" id="modalListComentario">

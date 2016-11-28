@@ -5,7 +5,7 @@ echo $this->msg();
 $this->dateTimePicker();
 ?>
 
-<div class="box box-danger">
+<div class="box">
     <div class="box-header with-border">
         <h3 class="box-title"><?= $titulo ?></h3>
     </div>
@@ -26,6 +26,24 @@ $this->dateTimePicker();
                 </div>
                 <div class="col-sm-8">
                     <input type="text" id='datetimepicker' name="dataLancamento" class="form-control" placeholder="Data Lançamento" value="<?= $rs['dataLancamento'] ?>">
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-4 text-right">
+                    <h5>Texto do rodapé</h5>
+                </div>
+                <div class="col-sm-8">
+                    <textarea  name="textoRodape" class="form-control" placeholder="Insira o texto que será exibido no rodapé" ><?= $rs['textoRodape'] ?></textarea>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-4 text-right">
+                    <h5>Descrição de Quem Somos</h5>
+                </div>
+                <div class="col-sm-8">
+                    <textarea rows="6"  name="textoQuemSomos" class="form-control" placeholder="Insira a descrção que será exibida na página Quem Somos" ><?= $rs['textoQuemSomos'] ?></textarea>
                 </div>
             </div>
             <hr>

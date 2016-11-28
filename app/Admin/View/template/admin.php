@@ -1,5 +1,6 @@
 <?php
 $_usuario = $this->auth()->getUsuario();
+$img_usuario = !empty($_usuario['img'])? $_usuario['img']: "/img/avatar.png";
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,7 @@ $_usuario = $this->auth()->getUsuario();
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="/admin/dist/css/skins/_all-skins.min.css">
         <?= $this->renderCss() ?>
-        
+
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,8 +32,8 @@ $_usuario = $this->auth()->getUsuario();
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-        
-        
+
+
         <!-- ./wrapper -->
 
         <!-- jQuery 2.2.3 -->
@@ -102,13 +103,13 @@ $_usuario = $this->auth()->getUsuario();
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="<?= $_usuario['img'] ?>" class="user-image" alt="User Image">
+                                    <img src="<?= $img_usuario ?>" class="user-image" alt="User Image">
                                     <span class="hidden-xs"><?= $_usuario['nome'] ?></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="<?= $_usuario['img'] ?>" class="img-circle" alt="User Image">
+                                        <img src="<?= $img_usuario ?>" class="img-circle" alt="User Image">
 
                                         <p>
                                             <?= $_usuario['nome'] ?>
@@ -116,24 +117,24 @@ $_usuario = $this->auth()->getUsuario();
                                         </p>
                                     </li>
                                     <!-- Menu Body -->
-                                    <li class="user-body">
-                                        <div class="row">
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Followers</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Sales</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Friends</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.row -->
-                                    </li>
+                                    <!--                                    <li class="user-body">
+                                                                            <div class="row">
+                                                                                <div class="col-xs-4 text-center">
+                                                                                    <a href="#">Followers</a>
+                                                                                </div>
+                                                                                <div class="col-xs-4 text-center">
+                                                                                    <a href="#">Sales</a>
+                                                                                </div>
+                                                                                <div class="col-xs-4 text-center">
+                                                                                    <a href="#">Friends</a>
+                                                                                </div>
+                                                                            </div>
+                                                                             /.row 
+                                                                        </li>-->
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                            <a href="/admin/usuario/edit/<?= $_usuario['id'] ?>" class="btn btn-default btn-flat">Editar Perfil</a>
                                         </div>
                                         <div class="pull-right">
                                             <a href="/usuario/sair" class="btn btn-default btn-flat">Sair</a>
@@ -157,7 +158,7 @@ $_usuario = $this->auth()->getUsuario();
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="<?= $_usuario['img'] ?>" class="img-circle" alt="User Image">
+                            <img src="<?= $img_usuario ?>" class="img-circle" alt="User Image">
                         </div>
                         <div class="pull-left info">
                             <p><?= $_usuario['nome'] ?></p>
@@ -192,6 +193,16 @@ $_usuario = $this->auth()->getUsuario();
                             'desc' => 'Usuários',
                             'icon' => 'fa-users',
                             'url' => '/admin/usuario'
+                        ],
+                        [
+                            'desc' => 'Lista de E-mails',
+                            'icon' => 'fa-envelope-o',
+                            'url' => '/admin/blog/lista-email'
+                        ],
+                        [
+                            'desc' => 'Configuração',
+                            'icon' => 'fa-cog',
+                            'url' => '/admin/config'
                         ]
                             ]
                     ?>
@@ -208,10 +219,10 @@ $_usuario = $this->auth()->getUsuario();
                         Administração
                         <small>Versão 0.1</small>
                     </h1>
-<!--                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li class="active">Dashboard</li>
-                    </ol>-->
+                    <!--                    <ol class="breadcrumb">
+                                            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                                            <li class="active">Dashboard</li>
+                                        </ol>-->
                 </section>
 
                 <!-- Main content -->

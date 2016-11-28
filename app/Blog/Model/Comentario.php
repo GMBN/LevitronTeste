@@ -81,7 +81,7 @@ class Comentario extends Model {
         if ($situ) {
             $sql .= ' AND situ = 8';//retorna apenas os ativos
         }
-        $sql .= ' ORDER BY c.id DESC';
+        $sql .= ' ORDER BY c.id ASC';
         $par = ['id_post' => $id_post];
         $rs = $this->query($sql, $par);
         return $rs;

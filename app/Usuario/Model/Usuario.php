@@ -89,7 +89,10 @@ class Usuario extends Model {
         $par['email'] = $email;
         $par['senha'] = $senha;
         $rs = $this->query($sql, $par);
-        return $rs[0];
+        if (isset($rs[0])) {
+            return $rs[0];
+        }
+        return false;
     }
 
     function findAutor() {

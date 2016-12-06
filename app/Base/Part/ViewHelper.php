@@ -2,7 +2,7 @@
 
 namespace App\Base\Part;
 
-trait ViewHelper {
+class ViewHelper {
 
     function menuAdmin($menu) {
         $uri_atual = $_SERVER['REQUEST_URI'];

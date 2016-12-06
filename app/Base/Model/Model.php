@@ -136,7 +136,7 @@ abstract class Model {
             if (DEBUG) {
                 echo $prepare->queryString;
                 print_r($prepare->errorInfo());
-                exit();
+//                exit();
             }
         }
     }

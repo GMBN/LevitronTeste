@@ -2,9 +2,13 @@
 
 namespace App\Base\Part;
 
-trait Seo{
+class Seo{
     
     protected  $_head;
+    
+    function getHead(){
+        return $this->_head;
+    }
     
    function title($titulo){
        $this->_head.= '<title>'.$titulo.' | SOS Casar</title>'

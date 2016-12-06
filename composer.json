@@ -7,7 +7,6 @@
         }
     },
     "require": {
-        "intervention/image": "^2.3",
-        "phpmailer/phpmailer": "^5.2"
+        "gmbn/eventphp": "dev-master"
     }
 }

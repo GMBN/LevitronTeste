@@ -1,3 +1,3 @@
 <?php
 
-define("DEBUG", false);
+define("DEBUG", true);

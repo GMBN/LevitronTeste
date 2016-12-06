@@ -2,6 +2,7 @@
 
 return [
     'route'=>[
-        '/base/we/are'=> 'Base:abc'
+        '/base/assets/css'=> 'Assets:renderCss',
+        '/base/assets/js'=> 'Assets:renderJs'
     ]
 ];

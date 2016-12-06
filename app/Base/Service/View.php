@@ -4,12 +4,10 @@ namespace App\Base\Service;
 
 class View {
 
-    //Adiciona os view helpers
-    use \App\Base\Part\ViewHelper,
-        \App\Base\Part\Assets,
-        \App\Base\Part\Seo;
+    private $_obj = [];
 
     function render($dados, $file_view, $file_template, $_template = true) {
+
         ob_start();
         extract($dados);
         require $file_view;
@@ -20,6 +18,12 @@ class View {
         } else {
             echo $_content;
         }
+    }
+
+    function __call($name, $arguments) {
+        global $e;
+        
+        return $e->trigger('view.' . $name, $arguments);
     }
 
 }

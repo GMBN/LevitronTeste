@@ -8,6 +8,7 @@ class App {
     protected $currentModule;
     protected $currentTemplate;
     protected $route = array();
+    protected $publicDir = array();
     protected $requestUri;
     protected $controller;
     protected $controllerName;
@@ -16,12 +17,8 @@ class App {
     protected $template;
     protected $config = array();
 
-//    public function __construct() {
-//        $this->module = $_GET['module'];
-//        $this->route = $_GET['route'];
-//    }
-
     function run() {
+        global $e;
         //Obtem todos os modulos ativos
         $modules = require __DIR__ . '/modules.php';
 
@@ -30,15 +27,42 @@ class App {
             //Obtem as configuracoes do modulo
             $config = require __DIR__ . '/' . $m . '/config.php';
 
+            //atribui a configuracao global do modulo
+            $GLOBALS['config']['module'][$m] = $config;
+
+            //Obtem os listeners globais do módulo 
+            $event = __DIR__ . '/' . $m . '/event.global.php';
+
+            if (file_exists($event)) {
+                require $event;
+            }
+
             //Obtem as rotas do modulo
             foreach ($config['route'] as $alias => $controller) {
                 $this->route[$alias] = $controller;
                 $this->module[$alias] = $m;
+
+                //atribui a configuracao da rota global
+                $GLOBALS['config']['route'][$alias] = "App\\{$m}\\Controller\\" . $controller;
             }
 
-            //Obtem o template do modulo
-            $this->template[$m] = $config['template'];
+            if (isset($config['public_dir'])) {
+
+                foreach ($config['public_dir'] as $alias => $folder) {
+                    $this->publicDir[$alias] = $folder;
+
+                    //atribui a configuracao do diretorio publico global
+                    $GLOBALS['config']['public_dir'][$alias] = $folder;
+                }
+            }
+
+            if (isset($config['template'])) {
+                //Obtem o template do modulo
+                $this->template[$m] = $config['template'];
+            }
+            
         }
+
 
         //Obtem os parametros da url acessada
         $request = explode('?', $_SERVER['REQUEST_URI']);
@@ -47,6 +71,34 @@ class App {
 
         $params = array();
 
+        //verifica se existe uma diretorio publico para essa rota
+        foreach ($this->publicDir as $alias => $folder) {
+            if (strpos($this->requestUri, $alias) === false) {
+                continue;
+            }
+
+            $filename = substr_replace($this->requestUri, '', 0, strlen($alias));
+            $file = $folder . $filename;
+            if (is_file($file)) {
+                $ext = pathinfo($file, PATHINFO_EXTENSION);
+                if($ext == 'php' || $ext == 'phtml'){
+                    require $file;
+                    die();
+                }
+                if($ext == 'js'){
+                    $type= 'application/javascript';
+                }else if($ext == 'css'){
+                    $type= 'text/css';
+                }else{
+                    $type = mime_content_type($file);
+                }
+                header('Content-Type: '.$type);
+                echo file_get_contents($file);
+                exit();
+            }
+        }
+
+
         //verifica se existe uma rota identica
         if (isset($this->route[$this->requestUri])) {
             $controller = $this->route[$this->requestUri];
@@ -54,7 +106,9 @@ class App {
             $array_controller = explode(':', $controller);
             $m = $this->module[$alias];
             $this->currentModule = $m;
-            $this->currentTemplate = $this->template[$m];
+            if (isset($this->template[$m])) {
+                $this->currentTemplate = $this->template[$m];
+            }
             $this->controller = "App\\{$m}\\Controller\\" . $array_controller[0];
             $this->controllerName = $array_controller[0];
             $this->action = $array_controller[1];
@@ -94,52 +148,49 @@ class App {
                 }
             }
         }
-        return $this->notFound();
-    }
-
-    function checkAuth() {
-        $config = require __DIR__ . '/config.php';
-        return (new \App\Usuario\Controller\Auth())->check($config);
+        $e->trigger('notFound', [$this->requestUri]);
     }
 
     function exec() {
-        if ($this->checkAuth()) {
-            $par = array_values($this->param);
-            $class = new $this->controller();
-            $dados = call_user_func_array(array($class, $this->action), $par);
-            if($dados===404){
-                return $this->notFound();
-            }
-            return $this->render($dados);
-        } else {
-            return $this->notAllow();
+        global $e;
+
+        $GLOBALS['configModule'] = $GLOBALS['config']['module'][$this->currentModule];
+
+        //Obtem os listener local do módulo 
+        $eventLocal = __DIR__ . '/' . $this->currentModule . '/event.local.php';
+
+        if (file_exists($eventLocal)) {
+            require $eventLocal;
         }
+
+        $eventCont = ROOT . '/app/' . $this->currentModule . '/Event/' . $this->controllerName . '.php';
+        if (file_exists($eventCont)) {
+            require $eventCont;
+        }
+
+        $e->trigger('preController', [$this->currentModule, $this->controller, $this->action, $this->param]);
+        $par = array_values($this->param);
+        $class = new $this->controller();
+        $dados = call_user_func_array(array($class, $this->action), $par);
+        if ($dados === 404) {
+            return $this->notFound();
+        }
+        return $this->render($dados);
     }
 
     function render($dados) {
+        global $e;
         $view = __DIR__ . '/' . $this->currentModule . '/View/' . strtolower($this->controllerName) . '/' . $this->action . '.php';
         if (file_exists($this->currentTemplate . '.php')) {
             $template = $this->currentTemplate . '.php';
         } else {
             $template = __DIR__ . '/' . $this->currentModule . '/View/template/' . $this->currentTemplate . '.php';
         }
+
+        $e->trigger('preRender', [$view, $template]);
+
         $service = new \App\Base\Service\View();
         return $service->render($dados, $view, $template);
-    }
-
-    function notAllow() {
-        $view = __DIR__ . '/Base/View/notAllow.php';
-        $template = __DIR__ . '/' . $this->currentModule . '/View/template/' . $this->currentTemplate . '.php';
-        $service = new \App\Base\Service\View();
-        return $service->render([], $view, $template);
-    }
-
-    function notFound() {
-        http_response_code(404);
-        $view = __DIR__ . '/Base/View/notFound.php';
-        $template = __DIR__ . '/Blog/View/template/blog.php';
-        $service = new \App\Base\Service\View();
-        return $service->render([], $view, $template);
     }
 
 }

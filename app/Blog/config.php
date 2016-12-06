@@ -15,5 +15,9 @@ return [
         '/' => 'Blog:index',
         '/blog/lista-email/save' => 'ListaEmail:save'
     ],
-    'template' => 'blog'
+    'template' => 'blog',
+    'public'=>true,
+    'public_dir'=>[
+        '/site/assets'=> __DIR__.'/View/template/assets'
+    ]
 ];

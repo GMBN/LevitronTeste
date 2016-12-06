@@ -1,8 +1,4 @@
-<?php
-$imgFundo = $this->getConfig('imagemFundo');
-$rs = $this->getConfig('textoQuemSomos');
-?>
-<section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="<?= $imgFundo ?>">
+<section class="inner-header divider parallax layer-overlay overlay-dark-5">
     <div class="container pt-120 pb-50">
         <!-- Section Content -->
         <div class="section-content pt-50">
@@ -22,7 +18,7 @@ $rs = $this->getConfig('textoQuemSomos');
                 <h3 class="mt-0 mb-0">Sobre Nós</h3>
                 <h5 class="text-gray">SOS Casar</h5>
                 <p>
-                    <?= $rs ?>
+                    
                 </p>
             </div>
         </div>

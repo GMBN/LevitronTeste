@@ -3,18 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/sos_casar/app/Admin/Controller/Blog.php</file>
-            <file>file:/var/www/sos_casar/app/Blog/View/categoria/index.php</file>
-            <file>file:/var/www/sos_casar/app/Blog/Controller/Blog.php</file>
-            <file>file:/var/www/sos_casar/app/Blog/View/template/blog.php</file>
-            <file>file:/var/www/sos_casar/app/Blog/Model/Categoria.php</file>
-            <file>file:/var/www/sos_casar/public/index.php</file>
-            <file>file:/var/www/sos_casar/app/Blog/Model/Post.php</file>
-            <file>file:/var/www/sos_casar/app/Admin/Controller/BlogCategoria.php</file>
-            <file>file:/var/www/sos_casar/app/Blog/View/blog/index.php</file>
-            <file>file:/var/www/sos_casar/app/Base/Service/SlugTrait.php</file>
-            <file>file:/var/www/sos_casar/app/Admin/View/usuario/index.php</file>
-            <file>file:/var/www/sos_casar/app/Admin/View/blogcategoria/index.php</file>
+            <file>file:/var/www/levitron/app/Base/Part/Seo.php</file>
+            <file>file:/var/www/levitron/app/Base/event.global.php</file>
+            <file>file:/var/www/levitron/app/EventJs/config.php</file>
+            <file>file:/var/www/levitron/app/Site/event.local.php</file>
+            <file>file:/var/www/levitron/app/EventJs/event.global.php</file>
+            <file>file:/var/www/levitron/app/Base/Part/ViewHelper.php</file>
+            <file>file:/var/www/levitron/app/EventJs/Controller/Event.php</file>
+            <file>file:/var/www/levitron/app/Site/Event/View/Menu.php</file>
+            <file>file:/var/www/levitron/app/Base/Part/Assets.php</file>
+            <file>file:/var/www/levitron/public/index.php</file>
+            <file>file:/var/www/levitron/app/Base/Event/View/ViewHelper.php</file>
+            <file>file:/var/www/levitron/app/Site/event.global.php</file>
+            <file>file:/var/www/levitron/app/EventJs/View/assets/js/event-php.js</file>
         </group>
     </open-files>
 </project-private>

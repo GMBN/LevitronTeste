@@ -2,6 +2,7 @@
 <?php
 $imgFundo = $this->getConfig('imagemFundo');
 $this->title('Blog');
+$this->gabriel();
 ?>
 <section class="inner-header divider parallax layer-overlay overlay-dark-5" data-bg-img="<?= $imgFundo ?>">
     <div class="container pt-120 pb-50">

@@ -5,7 +5,9 @@ namespace App\Site\Controller;
 
 class Pagina{
 
-    function sobre(){       
+    function sobre(){
+        global $e;
+        $e->trigger('gian',['ttttttt']);
         return [];
     }
    

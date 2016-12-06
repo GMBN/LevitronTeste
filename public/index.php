@@ -17,10 +17,18 @@ define('ROOT', __DIR__.'/..');
 if(isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] != '') {
     $_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_X_FORWARDED_FOR'];
 }
+
 require ROOT.'/debug.php';
-require ROOT.'/registra_erros.php';
+//require ROOT.'/registra_erros.php';
 require ROOT."/init_config.php";
 
 require ROOT."/vendor/autoload.php";
 
+$e = new \EventPHP\Event();//start global event 
+
+$config;
+$configModule;
+
 $start = (new \App\App())->run();
+
+print_r($e->listeners());

@@ -9,42 +9,45 @@
         <meta name="author" content="SOS Casar" />
 
         <!-- Page Title -->
-        <?= $this->_head ?>
-
+        <?= $this->getHead(); ?>
+        
         <!-- Favicon and Touch Icons -->
-        <link href="/site/images/favicon.png" rel="shortcut icon" type="image/png">
-        <link href="/site/images/apple-touch-icon.png" rel="apple-touch-icon">
-        <link href="/site/images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
-        <link href="/site/images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
-        <link href="/site/images/apple-touch-icon-144x144.png" rel="apple-touch-icon" sizes="144x144">
+        <link href="/site/assets/images/favicon.png" rel="shortcut icon" type="image/png">
+        <link href="/site/assets/images/apple-touch-icon.png" rel="apple-touch-icon">
+        <link href="/site/assets/images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+        <link href="/site/assets/images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+        <link href="/site/assets/images/apple-touch-icon-144x144.png" rel="apple-touch-icon" sizes="144x144">
 
         <!-- Stylesheet -->
-        <link href="/site/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="/site/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
-        <link href="/site/css/animate.css" rel="stylesheet" type="text/css">
-        <link href="/site/css/css-plugin-collections.css" rel="stylesheet"/>
+        <link href="/site/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="/site/assets/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+        <link href="/site/assets/css/animate.css" rel="stylesheet" type="text/css">
+        <link href="/site/assets/css/css-plugin-collections.css" rel="stylesheet"/>
         <!-- CSS | menuzord megamenu skins -->
-        <link id="menuzord-menu-skins" href="/site/css/menuzord-skins/menuzord-bottom-trace.css" rel="stylesheet"/>
+        <link id="menuzord-menu-skins" href="/site/assets/css/menuzord-skins/menuzord-bottom-trace.css" rel="stylesheet"/>
         <!-- CSS | Main style file -->
-        <link href="/site/css/style-main.css" rel="stylesheet" type="text/css">
+        <link href="/site/assets/css/style-main.css" rel="stylesheet" type="text/css">
         <!-- CSS | Theme Color -->
-        <link href="/site/css/colors/theme-skin-deep-pink.css" rel="stylesheet" type="text/css">
+        <link href="/site/assets/css/colors/theme-skin-deep-pink.css" rel="stylesheet" type="text/css">
         <!-- CSS | Preloader Styles -->
-        <link href="/site/css/preloader.css" rel="stylesheet" type="text/css">
+        <link href="/site/assets/css/preloader.css" rel="stylesheet" type="text/css">
         <!-- CSS | Custom Margin Padding Collection -->
-        <link href="/site/css/custom-bootstrap-margin-padding.css" rel="stylesheet" type="text/css">
+        <link href="/site/assets/css/custom-bootstrap-margin-padding.css" rel="stylesheet" type="text/css">
         <!-- CSS | Responsive media queries -->
-        <link href="/site/css/responsive.css" rel="stylesheet" type="text/css">
+        <link href="/site/assets/css/responsive.css" rel="stylesheet" type="text/css">
         <link href="/assets/css/app.css" rel="stylesheet" type="text/css">
         <!-- CSS | Style css. This is the file where you can place your own custom css code. Just uncomment it and use it. -->
         <!-- <link href="css/style.css" rel="stylesheet" type="text/css"> -->
 
         <!-- external javascripts -->
-        <script src="/site/js/jquery-2.2.0.min.js"></script>
-        <script src="/site/js/jquery-ui.min.js"></script>
-        <script src="/site/js/bootstrap.min.js"></script>
+        <script src="/site/assets/js/jquery-2.2.0.min.js"></script>
+        <script src="/site/assets/js/jquery-ui.min.js"></script>
+        <script src="/site/assets/js/bootstrap.min.js"></script>
         <!-- JS | jquery plugin collection for this theme -->
-        <script src="/site/js/jquery-plugin-collection.js"></script>
+        <script src="/site/assets/js/jquery-plugin-collection.js"></script>
+        <?php
+        $this->eventJs();
+        ?>
         <?= $this->renderJs() ?>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -160,7 +163,7 @@
 
         <!-- Footer Scripts -->
         <!-- JS | Custom script for all pages -->
-        <script src="/site/js/custom.js"></script>
+        <script src="/site/assets/js/custom.js"></script>
 
     </body>
 </html>
